@@ -22,13 +22,17 @@ Either instantiate a new `HLExplicitImageView` instance from code, or make your 
 
 **Get notified when a tap-to-retry succeded:**
 
-Implement `HLExplicitImageViewDelegate' and implement this method:
+Implement `HLExplicitImageViewDelegate` and implement this method:
 
 ```
 - (void)explicitImageViewFinallySucceded:(HLExplicitImageView *)imageView;
 ```
 
 You can use this method to automatically retry all downloads.
+
+## Settings
+
+You can adjust some parameters in the `HLExplicitImageView.m` file, such as placeholder and progress colors, or even the ratio between your ImageView and the progress view.
 
 ## Credits
 

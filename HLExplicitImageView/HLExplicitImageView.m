@@ -11,6 +11,10 @@
 #import "DACircularProgressView.h"
 #import "SDWebImageManager.h"
 
+#define             kRatio                      0.7f
+#define             kTrackTintColor             [UIColor colorWithRed:52./255. green:73./255. blue:93./255. alpha:0.2f]
+#define             kProgressColor              [UIColor colorWithRed:52./255. green:73./255. blue:93./255. alpha:0.8f]
+
 @interface HLExplicitImageView ()
 @property (nonatomic, strong) DACircularProgressView *circularProgressView;
 @property (nonatomic, strong) UIButton *errorButton;
@@ -33,22 +37,22 @@
     }
     
     DACircularProgressView *progressView = _circularProgressView;
+    CGRect destinationFrame;
     if (!progressView)
     {
-        CGFloat ratio = 0.7f;
-        CGRect destinationFrame = CGRectMake(CGRectGetWidth(self.frame) * ratio / 2.0f,
-                                             CGRectGetHeight(self.frame) * ratio / 2.0f,
-                                             CGRectGetWidth(self.frame) * (1.0f - ratio),
-                                             CGRectGetHeight(self.frame) * (1.0f - ratio));
+        destinationFrame = CGRectMake(CGRectGetWidth(self.frame) * kRatio / 2.0f,
+                                      CGRectGetHeight(self.frame) * kRatio / 2.0f,
+                                      CGRectGetWidth(self.frame) * (1.0f - kRatio),
+                                      CGRectGetHeight(self.frame) * (1.0f - kRatio));
         progressView = [[DACircularProgressView alloc] initWithFrame:destinationFrame];
         
         progressView.thicknessRatio = 0.2f;
-        progressView.trackTintColor = [UIColor colorWithRed:52./255. green:73./255. blue:93./255. alpha:0.2f];
-        progressView.progressTintColor = [UIColor colorWithRed:52./255. green:73./255. blue:93./255. alpha:0.8f];
+        progressView.trackTintColor = kTrackTintColor;
+        progressView.progressTintColor = kProgressColor;
     }
     
     [self addSubview:progressView];
-
+    
     if (_errorButton) {
         _errorButton.hidden = YES;
     }
@@ -79,11 +83,6 @@
                             {
                                 if (!_errorButton)
                                 {
-                                    CGFloat ratio = 0.6f;
-                                    CGRect destinationFrame = CGRectMake(CGRectGetWidth(self.frame) * ratio / 2.0f,
-                                                                         CGRectGetHeight(self.frame) * ratio / 2.0f,
-                                                                         CGRectGetWidth(self.frame) * (1.0f - ratio),
-                                                                         CGRectGetHeight(self.frame) * (1.0f - ratio));
                                     _errorButton = [[UIButton alloc] initWithFrame:destinationFrame];
                                     
                                     self.userInteractionEnabled = YES;
